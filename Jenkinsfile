@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage("Code Checkout"){
+            steps{
+                git branch: 'main', url: 'https://github.com/SK-260/flask-hello-world-devops'
+            }
+        }
+
         stage("Code Analysis"){
             steps{
                 sh '''#!/bin/bash
