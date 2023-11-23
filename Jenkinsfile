@@ -28,7 +28,7 @@ pipeline {
         stage("Code Analysis"){
             steps{
                 sh '''#!/bin/bash
-                    flake8 --format=pylint app.py test.py --exit-zero --output-file report.txt 
+                    .venv/bin/flake8 --format=pylint app.py test.py --exit-zero --output-file report.txt 
                 '''
                 recordIssues(tools: [flake8(pattern: 'report.txt')])
             }
@@ -37,7 +37,7 @@ pipeline {
         stage("Junit Test"){
             steps{
                 sh '''#!/bin/bash                    
-                    pytest test.py --junit-xml=report.xml
+                    .venv/bin/pytest test.py --junit-xml=report.xml
                 '''
                 junit skipPublishingChecks: true, testResults: 'report.xml'
             }
