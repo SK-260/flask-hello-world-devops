@@ -42,6 +42,21 @@ pipeline {
                 junit skipPublishingChecks: true, testResults: 'report.xml'
             }
         }
+        stage("Sonar Analysis"){
+            steps{
+                def scannerHome = tool 'sonarscanner';
+                withSonarQubeEnv('sonarserver', credentialsId: 'sonarkey'){
+                    sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flash-hello-world\
+                        -Dsonar.projectName=hello-world\
+                        -Dsonar.projectVersion=1.0\
+                        -Dsonar.sources=app.py\
+                        -Dsonar.tests=test.py\
+                        -Dsonar.junit.reportPaths=report.xml\
+                        -Dsonar.testExecutionReportPaths=report.txt
+                        '''
+                }
+            }
+        }
     }
 }
 
