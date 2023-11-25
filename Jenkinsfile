@@ -28,7 +28,7 @@ pipeline {
         stage("Code Analysis"){
             steps{
                 sh '''#!/bin/bash
-                    .venv/bin/flake8 --format=pylint app.py test.py --exit-zero --output-file flakreport.xml 
+                    .venv/bin/flake8 --format=pylint app.py test.py --exit-zero --output-file flak-report.xml 
                 '''
                 recordIssues(tools: [flake8(pattern: 'flak-report.xml')])
             }
@@ -49,12 +49,12 @@ pipeline {
             steps{ 
                 withSonarQubeEnv(installationName:'sonarserver', credentialsId: 'sonarkey'){
                     sh '''${scannerHome}/bin/sonar-scanner -X -Dsonar.projectKey=flash-hello-world\
-                        -Dsonar.projectName=hello-world\
+                        -Dsonar.projectName=flash-hello-world\
                         -Dsonar.projectVersion=1.0\
                         -Dsonar.sources=app.py\
                         -Dsonar.tests=test.py\
                         -Dsonar.junit.reportPaths=report.xml\
-                        -Dsonar.testExecutionReportPaths=flakreport.xml
+                        -Dsonar.testExecutionReportPaths=flak-report.xml
                         '''
                 }
             }
