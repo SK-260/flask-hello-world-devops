@@ -47,7 +47,7 @@ pipeline {
                 scannerHome = tool 'sonarscanner'
             }
             steps{ 
-                withSonarQubeEnv('sonarserver', credentialsId: 'sonarkey'){
+                withSonarQubeEnv(installationName:'sonarserver', credentialsId: 'sonarkey'){
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flash-hello-world\
                         -Dsonar.projectName=hello-world\
                         -Dsonar.projectVersion=1.0\
