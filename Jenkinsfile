@@ -43,8 +43,10 @@ pipeline {
             }
         }
         stage("Sonar Analysis"){
-            steps{
-                def scannerHome = tool 'sonarscanner';
+            environment{
+                scannerHome = tool 'sonarscanner'
+            }
+            steps{ 
                 withSonarQubeEnv('sonarserver', credentialsId: 'sonarkey'){
                     sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=flash-hello-world\
                         -Dsonar.projectName=hello-world\
