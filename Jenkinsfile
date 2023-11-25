@@ -53,7 +53,7 @@ pipeline {
                         -Dsonar.projectVersion=1.0\
                         -Dsonar.sources=app.py\
                         -Dsonar.tests=test.py\
-                        -Dsonar.junit.reportPaths=report.xml\
+                        -Dsonar.testExecutionReportPaths=report.xml\
                         
                         '''
                 }
