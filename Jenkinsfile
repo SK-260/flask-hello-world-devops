@@ -54,7 +54,7 @@ pipeline {
                         -Dsonar.sources=app.py\
                         -Dsonar.tests=test.py\
                         -Dsonar.junit.reportPaths=report.xml\
-                        -Dsonar.testExecutionReportPaths=flak-report.xml
+                        
                         '''
                 }
             }
@@ -62,3 +62,6 @@ pipeline {
     }
 }
 
+
+
+// -Dsonar.testExecutionReportPaths=flak-report.xml
