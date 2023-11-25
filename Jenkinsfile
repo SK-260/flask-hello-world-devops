@@ -28,9 +28,9 @@ pipeline {
         stage("Code Analysis"){
             steps{
                 sh '''#!/bin/bash
-                    .venv/bin/flake8 --format=pylint app.py test.py --exit-zero --output-file report.txt 
+                    .venv/bin/flake8 --format=pylint app.py test.py --exit-zero --output-file flakreport.xml 
                 '''
-                recordIssues(tools: [flake8(pattern: 'report.txt')])
+                recordIssues(tools: [flake8(pattern: 'flak-report.xml')])
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
                         -Dsonar.sources=app.py\
                         -Dsonar.tests=test.py\
                         -Dsonar.junit.reportPaths=report.xml\
-                        -Dsonar.testExecutionReportPaths=report.txt
+                        -Dsonar.testExecutionReportPaths=flakreport.xml
                         '''
                 }
             }
