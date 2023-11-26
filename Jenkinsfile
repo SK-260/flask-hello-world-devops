@@ -59,6 +59,11 @@ pipeline {
                 }
             }
         }
+        stage("Build docker image"){
+            steps{
+                def dockerImage = docker.build("sk260/flask-hello-world:${env.BUILD_ID}")               
+            }
+        }
     }
 }
 
