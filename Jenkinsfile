@@ -62,7 +62,17 @@ pipeline {
         stage("Build docker image"){
             steps{
                 script{
-                    dockerImage = docker.build("sk260/flask-hello-world:${env.BUILD_ID}")               
+                    dockerImage = docker.build("sk260/flask-hello-world")               
+                }
+            }
+        }
+        stage("Push to Docker Hub"){
+            steps{
+                script{
+                    docker.withRegistry("","dockerhub"){
+                        dockerImage.push()
+                        dockerImage.push("latest")
+                    }
                 }
             }
         }
