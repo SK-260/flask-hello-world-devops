@@ -61,7 +61,9 @@ pipeline {
         }
         stage("Build docker image"){
             steps{
-                dockerImage = docker.build("sk260/flask-hello-world:${env.BUILD_ID}")               
+                script{
+                    dockerImage = docker.build("sk260/flask-hello-world:${env.BUILD_ID}")               
+                }
             }
         }
     }
