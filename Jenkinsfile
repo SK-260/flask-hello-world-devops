@@ -77,12 +77,13 @@ pipeline {
             }
         }
         stage("Deploy to k8's Cluster"){
-            withKubeConfig([credentialsId: 'kubeconfig']){
-                sh '''kubectl apply -f deployment.yml
-                      kubectl apply -f deploymentservice.yml
-                '''
+            steps{
+                withKubeConfig([credentialsId: 'kubeconfig']){
+                    sh '''kubectl apply -f deployment.yml
+                          kubectl apply -f deploymentservice.yml
+                    '''
+                }
             }
-
         }
     }
 }
