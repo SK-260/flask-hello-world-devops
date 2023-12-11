@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app.kubernetes.io/name: hello-world
+    app: hello-world
   ports:
     - port: 5000
       # By default and for convenience, the `targetPort` is set to
